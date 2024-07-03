@@ -8,11 +8,12 @@ import pickle
 from multiprocessing import Pool
 
 data, encrypted_data, decrypted_data = b'', b'', b''
-key = b'"\x81\xf4\xba\xef\xa5:\x89fWtP\xc7\x92o\xbf'  # key 的长度为16个byte
+key = b'"\x81\xf4\xba\xef\xa5:\x89fWtP\xc7\x92o\xbf'  # key length is 16 bytes
 cipher = AES_CBC_ESSIV(key)
 PATH = os.getcwd() + '/'
 BLOCK_SIZE = 512
 
+image_dic = {}
 image_path = PATH + r'../Datasets/Cityscape2K/'
 data_path = image_path + r"GT"
 en = image_path + r"En"
@@ -162,10 +163,8 @@ if __name__ == '__main__':
     image_dic = load_dict(image_path + 'image')
 
     # 3rd encrypt the JPEG file and inject bit error, and then decrypt the JPEG file with bit errors.
-    pool = Pool(4)
-    pool.map(inject_error, image_dic.keys())
-    pool.close()
-    pool.join()
+    for key in image_dic:
+        inject_error(key)
 
 
 
