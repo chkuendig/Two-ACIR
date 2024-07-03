@@ -1,0 +1,15 @@
+.venv
+# Byte-compiled / optimized / DLL files
+__pycache__/
+
+# model outputs
+Recovery network/Pix2PixHD_modify/checkpoints/*/opt.txt
+Recovery network/Pix2PixHD_modify/checkpoints/*/loss_log.txt
+Recovery network/Pix2PixHD_modify/checkpoints/*/logs/
+Recovery network/Pix2PixHD_modify/results/**/images/*_Ours.png
+Recovery network/Pix2PixHD_modify/results/**/images/*_Ours_edge.png
+Recovery network/Pix2PixHD_modify/results/**/images/*_pix2pixHD.png
+Recovery network/Pix2PixHD_modify/results/**/images/*_pix2pixHD_edge.png
+Recovery network/Pix2PixHD_modify/results/**/images/*_real_image_edge.png
+Recovery network/Pix2PixHD_modify/results/**/*.txt
+Recovery network/Pix2PixHD_modify/results/**/index.html
