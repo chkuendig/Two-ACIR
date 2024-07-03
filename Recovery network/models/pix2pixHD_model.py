@@ -112,14 +112,14 @@ class Pix2PixHDModel(BaseModel):
 
 
     def encode_input(self, label, image, gt_thumbnail, gt_thumbnail_original, infer=False):
-        label = label.data.cuda()
-        image = Variable(image.data.cuda())
-        gt_thumbnail = Variable(gt_thumbnail.data.cuda())
+        label = label.data.to()
+        image = Variable(image.data.to())
+        gt_thumbnail = Variable(gt_thumbnail.data.to())
         input_label = torch.cat((label, gt_thumbnail), dim=1)
 
         w = gt_thumbnail_original.shape[3]
         gt_thumbnail_original = gt_thumbnail_original[:,:,:,:w]
-        gt_thumbnail_original = Variable(gt_thumbnail_original.data.cuda())
+        gt_thumbnail_original = Variable(gt_thumbnail_original.data.to())
         return input_label, image, gt_thumbnail, gt_thumbnail_original
 
     def discriminate(self, input_label, test_image, use_pool=False):
@@ -216,11 +216,11 @@ class Pix2PixHDModel(BaseModel):
         return feat_map
 
     def encode_features(self, image, inst):
-        image = Variable(image.cuda(), volatile=True)
+        image = Variable(image.to(), volatile=True)
         feat_num = self.opt.feat_num
         h, w = inst.size()[2], inst.size()[3]
         block_num = 32
-        feat_map = self.netE.forward(image, inst.cuda())
+        feat_map = self.netE.forward(image, inst.to())
         inst_np = inst.cpu().numpy().astype(int)
         feature = {}
         for i in range(self.opt.label_nc):
